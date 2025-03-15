@@ -145,6 +145,7 @@ function PlaceholderGlobal.Util:AngleToDirection(angle)
 end
 
 ---@param vector Vector
+---@return Direction
 function PlaceholderGlobal.Util:VectorToDirection(vector)
     if vector:Length() < 0.001 then
         return Direction.NO_DIRECTION
@@ -195,6 +196,7 @@ function PlaceholderGlobal.Util:AnyKeyIs(tbl, key)
             return true
         end
     end
+
     return false
 end
 
@@ -320,7 +322,6 @@ end
 
 ---@param entity Entity
 ---@param searchType PlayerSearchType
----@return EntityPlayer?
 function PlaceholderGlobal.Util:GetPlayerFromEntity(entity, searchType)
     local player = (entity.SpawnerEntity and entity.SpawnerEntity:ToPlayer()) or (entity.Parent and entity.Parent:ToPlayer()) or entity:ToPlayer()
 
@@ -396,9 +397,8 @@ end
 
 ---@param player EntityPlayer
 ---@param disableClamp? boolean
----@return Vector
 function PlaceholderGlobal.Util:GetInputAimVect(player, disableClamp)
-    local returnVect
+    local returnVect = Vector.Zero
 
     if player.ControllerIndex == 0 and Options.MouseControl then
         if Input.IsMouseBtnPressed(0) then
@@ -510,7 +510,6 @@ function PlaceholderGlobal.Util:GetNearestEntity(pos, source, maxDistance, filte
 end
 
 ---@param entity Entity
----@return boolean
 function PlaceholderGlobal.Util:IsValidEnemy(entity)
     return (entity:IsEnemy() and entity:IsVulnerableEnemy() and not entity:HasEntityFlags(EntityFlag.FLAG_FRIENDLY))
 end
@@ -518,13 +517,11 @@ end
 ---@param idx integer
 ---@param max integer
 ---@param spread number
----@return number
 function PlaceholderGlobal.Util:SpreadShotAngle(idx, max, spread)
     return (idx - max / 2 - 0.5) * spread / (max - 1)
 end
 
 ---@param color Color
----@return Color
 function PlaceholderGlobal.Util:CopyColor(color)
     local colour = Color(color.R, color.G, color.G, color.A, color.RO, color.GO, color.BO)
 

@@ -4,33 +4,35 @@
 ---@field Delay integer
 ---@field Type FunctionScheduleType
 
+---@class Scheduler
+local Scheduler = {
+    ---@type SchedulerEntry[]
+    Entries = {},
+}
+
+---@enum FunctionScheduleType
+Scheduler.Type = {
+    PERSISTENT = 1,
+    LEAVE_ROOM_CANCEL = 2,
+    POST_LEAVE_ROOM_EXECUTE = 3,
+    PRE_LEAVE_ROOM_EXECUTE = 4,
+}
+
+local game = Game()
+
+---@param fn function
+---@param delay integer
+---@param type FunctionScheduleType
+function Scheduler:Schedule(fn, delay, type)
+    table.insert(Scheduler.Entries, {
+        Frame = game:GetFrameCount(),
+        Fn = fn,
+        Delay = delay,
+        Type = type
+    })
+end
+
 return function (mod)
-    local Scheduler = {
-        ---@type SchedulerEntry[]
-        Entries = {},
-        ---@enum FunctionScheduleType
-        Type = {
-            PERSISTENT = 1,
-            LEAVE_ROOM_CANCEL = 2,
-            POST_LEAVE_ROOM_EXECUTE = 3,
-            PRE_LEAVE_ROOM_EXECUTE = 4,
-        },
-    }
-
-    local game = Game()
-
-    ---@param fn function
-    ---@param delay integer
-    ---@param type FunctionScheduleType
-    function Scheduler:Schedule(fn, delay, type)
-        table.insert(Scheduler.Entries, {
-            Frame = game:GetFrameCount(),
-            Fn = fn,
-            Delay = delay,
-            Type = type
-        })
-    end
-
     mod:AddCallback(ModCallbacks.MC_PRE_GAME_EXIT, function ()
         Scheduler.Entries = {}
     end)

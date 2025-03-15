@@ -27,7 +27,7 @@ PlaceholderGlobal.Enum.HealthType = {
 }
 
 PlaceholderGlobal.Enum.Dict = {
-    ---@type table<integer, Direction>
+    ---@type Direction[]
     ANGLE_TO_DIRECTION = {
         Direction.RIGHT,
         Direction.DOWN,

@@ -209,7 +209,7 @@ function PlaceholderGlobal.Util:RandomVector(rng)
         return rng:RandomVector()
     end
 
-    return Vector(1, 0):Rotated(rng:RandomFloat() * 360)
+    return Vector.FromAngle(rng:RandomFloat() * 360)
 end
 
 ---@param player EntityPlayer
