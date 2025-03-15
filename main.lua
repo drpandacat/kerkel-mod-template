@@ -1,7 +1,7 @@
 ---@class ModReference
 PlaceholderGlobal = RegisterMod("Placeholder Name", 1)
 
-PlaceholderGlobal.SaveManager = include("scripts.utility.savemanager")
+PlaceholderGlobal.SaveManager = require("scripts.utility.savemanager")
 PlaceholderGlobal.SaveManager.Init(PlaceholderGlobal)
 
 PlaceholderGlobal.Scheduler = include("scripts.utility.scheduler")(PlaceholderGlobal)
