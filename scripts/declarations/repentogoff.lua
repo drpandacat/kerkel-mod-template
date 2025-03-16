@@ -226,27 +226,27 @@ end
 
 function PlaceholderGlobal.Util:Picker()
     ---@class Picker
-    local picker = {}
+    local Picker = {}
 
-    picker.Outcomes = {}
+    Picker.Outcomes = {}
 
     ---@param value any
     ---@param weight number
-    function picker:Add(weight, value)
-        table.insert(picker.Outcomes, {weight, value})
+    function Picker:Add(weight, value)
+        table.insert(Picker.Outcomes, {weight, value})
     end
 
     ---@param rng RNG
-    function picker:Pick(rng)
+    function Picker:Pick(rng)
         local totalWeight = 0
 
-        for _, v in ipairs(picker.Outcomes) do
+        for _, v in ipairs(Picker.Outcomes) do
             totalWeight = totalWeight + v[1]
         end
 
         local roll = rng:RandomFloat() * totalWeight
 
-        for _, v in ipairs(picker.Outcomes) do
+        for _, v in ipairs(Picker.Outcomes) do
             if roll > v[1] then
                 roll = roll - v[1]
             else
@@ -255,11 +255,11 @@ function PlaceholderGlobal.Util:Picker()
         end
     end
 
-    function picker:Clear()
-        picker.Outcomes = {}
+    function Picker:Clear()
+        Picker.Outcomes = {}
     end
 
-    return picker
+    return Picker
 end
 
 ---@param player EntityPlayer
