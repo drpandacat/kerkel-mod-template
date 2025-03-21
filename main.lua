@@ -1,4 +1,3 @@
----@class ModReference
 PlaceholderGlobal = RegisterMod("Placeholder Name", 1)
 
 PlaceholderGlobal.SaveManager = require("scripts.utility.savemanager")
