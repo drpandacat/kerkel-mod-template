@@ -6,8 +6,8 @@ function PlaceholderGlobal.Util:GetPlayers()
 
     local players = {}
 
-    for i = 0, PlaceholderGlobal.Enum.Obj.GAME:GetNumPlayers() - 1 do
-        players[#players + 1] = Isaac.GetPlayer(i)
+    for i = 1, PlaceholderGlobal.Enum.Obj.Game:GetNumPlayers() do
+        players[i] = Isaac.GetPlayer(i)
     end
 
     return players

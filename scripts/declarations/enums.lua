@@ -1,8 +1,8 @@
 PlaceholderGlobal.Enum = {}
 
 PlaceholderGlobal.Enum.Obj = {
-    GAME = Game(),
-    SFX = SFXManager(),
+    Game = Game(),
+    Sfx = SFXManager(),
 }
 
 ---@enum FireplaceVariant
@@ -77,6 +77,13 @@ PlaceholderGlobal.Enum.Dict = {
     DESTROYABLE_FIREPLACE = {
         [PlaceholderGlobal.Enum.Fireplace.NORMAL] = true,
         [PlaceholderGlobal.Enum.Fireplace.RED] = true,
+    },
+    ---@type table<CollectibleType, true>
+    AIM_UNCLAMP_COLLECTIBLE = {
+        [CollectibleType.COLLECTIBLE_MARKED] = true,
+        [CollectibleType.COLLECTIBLE_ANALOG_STICK] = true,
+        [CollectibleType.COLLECTIBLE_EYE_OF_THE_OCCULT] = true,
+        [CollectibleType.COLLECTIBLE_EPIC_FETUS] = true,
     }
 }
 

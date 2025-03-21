@@ -8,7 +8,7 @@ PlaceholderGlobal.Util = {}
 ---@param spawner? Entity
 ---@param seed? integer
 function PlaceholderGlobal.Util:SpawnNPC(type, variant, position, velocity, spawner, subtype, seed)
-    return PlaceholderGlobal.Enum.Obj.GAME:Spawn(type, variant, position, velocity or Vector.Zero, spawner or nil, subtype or 0, seed or math.max(Random(), 1)):ToNPC()
+    return PlaceholderGlobal.Enum.Obj.Game:Spawn(type, variant, position, velocity or Vector.Zero, spawner or nil, subtype or 0, seed or math.max(Random(), 1)):ToNPC()
 end
 
 ---@param variant EffectVariant | integer
@@ -18,7 +18,7 @@ end
 ---@param spawner? Entity
 ---@param seed? integer
 function PlaceholderGlobal.Util:SpawnEffect(variant, position, velocity, spawner, subtype, seed)
-    return PlaceholderGlobal.Enum.Obj.GAME:Spawn(EntityType.ENTITY_EFFECT, variant, position, velocity or Vector.Zero, spawner or nil, subtype or 0, seed or math.max(Random(), 1)):ToEffect()
+    return PlaceholderGlobal.Enum.Obj.Game:Spawn(EntityType.ENTITY_EFFECT, variant, position, velocity or Vector.Zero, spawner or nil, subtype or 0, seed or math.max(Random(), 1)):ToEffect()
 end
 
 ---@param variant TearVariant | integer
@@ -28,7 +28,7 @@ end
 ---@param spawner? Entity
 ---@param seed? integer
 function PlaceholderGlobal.Util:SpawnTear(variant, position, velocity, spawner, subtype, seed)
-    return PlaceholderGlobal.Enum.Obj.GAME:Spawn(EntityType.ENTITY_TEAR, variant, position, velocity or Vector.Zero, spawner or nil, subtype or 0, seed or math.max(Random(), 1)):ToTear()
+    return PlaceholderGlobal.Enum.Obj.Game:Spawn(EntityType.ENTITY_TEAR, variant, position, velocity or Vector.Zero, spawner or nil, subtype or 0, seed or math.max(Random(), 1)):ToTear()
 end
 
 ---@param variant ProjectileVariant | integer
@@ -38,7 +38,7 @@ end
 ---@param spawner? Entity
 ---@param seed? integer
 function PlaceholderGlobal.Util:SpawnProjectile(variant, position, velocity, spawner, subtype, seed)
-    return PlaceholderGlobal.Enum.Obj.GAME:Spawn(EntityType.ENTITY_PROJECTILE, variant, position, velocity or Vector.Zero, spawner or nil, subtype or 0, seed or math.max(Random(), 1)):ToProjectile()
+    return PlaceholderGlobal.Enum.Obj.Game:Spawn(EntityType.ENTITY_PROJECTILE, variant, position, velocity or Vector.Zero, spawner or nil, subtype or 0, seed or math.max(Random(), 1)):ToProjectile()
 end
 
 ---@param variant PickupVariant | integer
@@ -48,7 +48,7 @@ end
 ---@param spawner? Entity
 ---@param seed? integer
 function PlaceholderGlobal.Util:SpawnPickup(variant, position, velocity, spawner, subtype, seed)
-    return PlaceholderGlobal.Enum.Obj.GAME:Spawn(EntityType.ENTITY_PICKUP, variant, position, velocity or Vector.Zero, spawner or nil, subtype or 0, seed or math.max(Random(), 1)):ToPickup()
+    return PlaceholderGlobal.Enum.Obj.Game:Spawn(EntityType.ENTITY_PICKUP, variant, position, velocity or Vector.Zero, spawner or nil, subtype or 0, seed or math.max(Random(), 1)):ToPickup()
 end
 
 ---@param variant FamiliarVariant | integer
@@ -58,7 +58,7 @@ end
 ---@param spawner? Entity
 ---@param seed? integer
 function PlaceholderGlobal.Util:SpawnFamiliar(variant, position, velocity, spawner, subtype, seed)
-    return PlaceholderGlobal.Enum.Obj.GAME:Spawn(EntityType.ENTITY_FAMILIAR, variant, position, velocity or Vector.Zero, spawner or nil, subtype or 0, seed or math.max(Random(), 1)):ToFamiliar()
+    return PlaceholderGlobal.Enum.Obj.Game:Spawn(EntityType.ENTITY_FAMILIAR, variant, position, velocity or Vector.Zero, spawner or nil, subtype or 0, seed or math.max(Random(), 1)):ToFamiliar()
 end
 
 ---@param variant BombVariant | integer
@@ -68,7 +68,7 @@ end
 ---@param spawner? Entity
 ---@param seed? integer
 function PlaceholderGlobal.Util:SpawnBomb(variant, position, velocity, spawner, subtype, seed)
-    return PlaceholderGlobal.Enum.Obj.GAME:Spawn(EntityType.ENTITY_BOMB, variant, position, velocity or Vector.Zero, spawner or nil, subtype or 0, seed or math.max(Random(), 1)):ToBomb()
+    return PlaceholderGlobal.Enum.Obj.Game:Spawn(EntityType.ENTITY_BOMB, variant, position, velocity or Vector.Zero, spawner or nil, subtype or 0, seed or math.max(Random(), 1)):ToBomb()
 end
 
 ---@param variant integer
@@ -78,7 +78,7 @@ end
 ---@param spawner? Entity
 ---@param seed? integer
 function PlaceholderGlobal.Util:SpawnKnife(variant, position, velocity, spawner, subtype, seed)
-    return PlaceholderGlobal.Enum.Obj.GAME:Spawn(EntityType.ENTITY_KNIFE, variant, position, velocity or Vector.Zero, spawner or nil, subtype or 0, seed or math.max(Random(), 1)):ToKnife()
+    return PlaceholderGlobal.Enum.Obj.Game:Spawn(EntityType.ENTITY_KNIFE, variant, position, velocity or Vector.Zero, spawner or nil, subtype or 0, seed or math.max(Random(), 1)):ToKnife()
 end
 
 ---@param variant LaserVariant | integer
@@ -88,7 +88,7 @@ end
 ---@param spawner? Entity
 ---@param seed? integer
 function PlaceholderGlobal.Util:SpawnLaser(variant, position, velocity, spawner, subtype, seed)
-    return PlaceholderGlobal.Enum.Obj.GAME:Spawn(EntityType.ENTITY_LASER, variant, position, velocity or Vector.Zero, spawner or nil, subtype or 0, seed or math.max(Random(), 1)):ToLaser()
+    return PlaceholderGlobal.Enum.Obj.Game:Spawn(EntityType.ENTITY_LASER, variant, position, velocity or Vector.Zero, spawner or nil, subtype or 0, seed or math.max(Random(), 1)):ToLaser()
 end
 
 ---@param variant integer
@@ -98,7 +98,7 @@ end
 ---@param spawner? Entity
 ---@param seed? integer
 function PlaceholderGlobal.Util:SpawnSlot(variant, position, velocity, spawner, subtype, seed)
-    return PlaceholderGlobal.Enum.Obj.GAME:Spawn(EntityType.ENTITY_SLOT, variant, position, velocity or Vector.Zero, spawner or nil, subtype or 0, seed or math.max(Random(), 1))
+    return PlaceholderGlobal.Enum.Obj.Game:Spawn(EntityType.ENTITY_SLOT, variant, position, velocity or Vector.Zero, spawner or nil, subtype or 0, seed or math.max(Random(), 1))
 end
 
 ---@generic T
@@ -215,15 +215,15 @@ function PlaceholderGlobal.Util:DeepCopy(tbl, deeperCopy)
 end
 
 ---@generic T
----@param tbl T
----@param filter fun(a: any): boolean?
+---@param tbl T[]
+---@param filter? fun(value: T, key: any): boolean?
 ---@return T
 function PlaceholderGlobal.Util:Filter(tbl, filter)
     local _tbl = {}
 
-    for _, v in pairs(tbl) do
-        if filter(v) then
-            table.insert(_tbl, v)
+    for k, v in pairs(tbl) do
+        if not filter or filter(v, k) then
+            _tbl[#_tbl + 1] = v
         end
     end
 
@@ -238,21 +238,26 @@ function PlaceholderGlobal.Util:RandomFloatRange(min, max, rng)
     return min + rng:RandomFloat() * (max - min)
 end
 
+---@param seed integer
+function PlaceholderGlobal.Util:GetPoolForRoom(seed)
+    return math.max(ItemPoolType.POOL_TREASURE, PlaceholderGlobal.Enum.Obj.Game:GetItemPool():GetPoolForRoom(PlaceholderGlobal.Enum.Obj.Game:GetRoom():GetType(), seed))
+end
+
 ---@param filter fun(config: ItemConfigItem): boolean | nil
 ---@param poolType? ItemPoolType
 ---@param maxTries? integer
 ---@param seed? integer
 ---@return CollectibleType, boolean
 function PlaceholderGlobal.Util:GetFilteredCollectible(filter, poolType, maxTries, seed)
-    local rng = PlaceholderGlobal.Util:NewRNG(seed or PlaceholderGlobal.Enum.Obj.GAME:GetSeeds():GetStartSeed())
-    local pool = PlaceholderGlobal.Enum.Obj.GAME:GetItemPool()
+    local rng = PlaceholderGlobal.Util:NewRNG(seed or PlaceholderGlobal.Enum.Obj.Game:GetSeeds():GetStartSeed())
+    local pool = PlaceholderGlobal.Enum.Obj.Game:GetItemPool()
     local config = Isaac.GetItemConfig()
     local collectible = CollectibleType.COLLECTIBLE_BREAKFAST
     local successful
 
-    poolType = poolType or math.max(ItemPoolType.POOL_TREASURE, pool:GetPoolForRoom(PlaceholderGlobal.Enum.Obj.GAME:GetRoom():GetType(), rng:Next()))
+    poolType = poolType or PlaceholderGlobal.Util:GetPoolForRoom(rng:Next())
 
-    for i = 1, maxTries or 200 do
+    for _ = 1, maxTries or 200 do
         collectible = pool:GetCollectible(poolType, false, rng:Next())
 
         if filter(config:GetCollectible(collectible)) then
@@ -271,11 +276,11 @@ end
 ---@return TrinketType, boolean
 function PlaceholderGlobal.Util:GetFilteredTrinket(filter, maxTries)
     local trinket = TrinketType.TRINKET_WIGGLE_WORM
-    local pool = PlaceholderGlobal.Enum.Obj.GAME:GetItemPool()
+    local pool = PlaceholderGlobal.Enum.Obj.Game:GetItemPool()
     local config = Isaac.GetItemConfig()
     local successful
 
-    for i = 1, maxTries or 100 do
+    for _ = 1, maxTries or 100 do
         trinket = pool:GetTrinket()
 
         if filter(config:GetTrinket(trinket)) then
@@ -296,14 +301,14 @@ end
 ---@return Card, boolean
 function PlaceholderGlobal.Util:GetFilteredCard(filter, maxTries, seed, flags)
     local card = Card.CARD_FOOL
-    local pool = PlaceholderGlobal.Enum.Obj.GAME:GetItemPool()
+    local pool = PlaceholderGlobal.Enum.Obj.Game:GetItemPool()
     local config = Isaac.GetItemConfig()
     local successful
 
-    seed = seed or PlaceholderGlobal.Enum.Obj.GAME:GetSeeds():GetStartSeed()
+    seed = seed or PlaceholderGlobal.Enum.Obj.Game:GetSeeds():GetStartSeed()
     flags = flags or 0
 
-    for i = 1, maxTries or 100 do
+    for _ = 1, maxTries or 100 do
         card = pool:GetCard(
             seed,
             PlaceholderGlobal.Util:HasFlags(flags, PlaceholderGlobal.Enum.CardFilterFlags.INCLUDE_PLAYING_CARDS),
@@ -337,11 +342,11 @@ function PlaceholderGlobal.Util:GetPlayerFromEntity(entity, searchType)
     local spawners = {}
 
     if entity.SpawnerEntity then
-        table.insert(spawners, entity.SpawnerEntity)
+        spawners[#spawners + 1] = entity.SpawnerEntity
     end
 
     if entity.Parent then
-        table.insert(spawners, entity.Parent)
+        spawners[#spawners + 1] = entity.Parent
     end
 
     for _, v in ipairs(spawners) do
@@ -396,6 +401,16 @@ function PlaceholderGlobal.Util:GetData(entity, identifier, persistenceMode, def
 end
 
 ---@param player EntityPlayer
+function PlaceholderGlobal.Util:IsAimUnclamped(player)
+    for k in pairs(PlaceholderGlobal.Enum.Dict.AIM_UNCLAMP_COLLECTIBLE) do
+        if player:HasCollectible(k) then
+            return true
+        end
+    end
+    return false
+end
+
+---@param player EntityPlayer
 ---@param disableClamp? boolean
 function PlaceholderGlobal.Util:GetInputAimVect(player, disableClamp)
     local returnVect = Vector.Zero
@@ -410,8 +425,7 @@ function PlaceholderGlobal.Util:GetInputAimVect(player, disableClamp)
 
     if not disableClamp then
         if returnVect:Length() > 0.001 then
-            if not player:HasCollectible(CollectibleType.COLLECTIBLE_MARKED)
-            and not player:HasCollectible(CollectibleType.COLLECTIBLE_ANALOG_STICK) then
+            if not PlaceholderGlobal.Util:IsAimUnclamped(player) then
                 returnVect = PlaceholderGlobal.Util:CardinalClamp(returnVect)
             end
         end
@@ -442,8 +456,7 @@ function PlaceholderGlobal.Util:GetDynamicAimVect(player, disableClamp)
 
     if not disableClamp then
         if returnVect:Length() > 0.001 then
-            if not player:HasCollectible(CollectibleType.COLLECTIBLE_MARKED)
-            and not player:HasCollectible(CollectibleType.COLLECTIBLE_ANALOG_STICK) then
+            if not PlaceholderGlobal.Util:IsAimUnclamped(player) then
                 returnVect = PlaceholderGlobal.Util:CardinalClamp(returnVect)
             end
         end
@@ -480,7 +493,7 @@ function PlaceholderGlobal.Util:EntitiesByDistance(list, pos, filter, source)
 
         for _, v in pairs(list) do
             if hash ~= GetPtrHash(v) then
-                table.insert(_list, v)
+                _list[#_list + 1] = v
             end
         end
     else
@@ -523,13 +536,13 @@ end
 
 ---@param color Color
 function PlaceholderGlobal.Util:CopyColor(color)
-    local colour = Color(color.R, color.G, color.G, color.A, color.RO, color.GO, color.BO)
+    local _color = Color(color.R, color.G, color.G, color.A, color.RO, color.GO, color.BO)
 
     if REPENTOGON then
         ---@diagnostic disable-next-line: undefined-field
         local colorize = color:GetColorize()
-        colour:SetColorize(colorize.R, colorize.G, colorize.B, colorize.A)
+        _color:SetColorize(colorize.R, colorize.G, colorize.B, colorize.A)
     end
 
-    return colour
+    return _color
 end
