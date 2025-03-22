@@ -233,7 +233,7 @@ function PlaceholderGlobal.Util:Picker()
     ---@param value any
     ---@param weight number
     function Picker:Add(weight, value)
-        table.insert(Picker.Outcomes, {weight, value})
+        Picker.Outcomes[#Picker.Outcomes + 1] = {weight, value}
     end
 
     ---@param rng RNG
