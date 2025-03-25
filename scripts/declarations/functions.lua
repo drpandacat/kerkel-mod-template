@@ -217,7 +217,7 @@ end
 ---@generic T
 ---@param tbl T[]
 ---@param filter? fun(value: T, key: any): boolean?
----@return T
+---@return T[]
 function PlaceholderGlobal.Util:Filter(tbl, filter)
     local _tbl = {}
 
