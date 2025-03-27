@@ -1,0 +1,10 @@
+<AnimatedActor>
+	<Info CreatedBy="Kerkel" CreatedOn="" Version="0" Fps="30"/>
+	<Content>
+		<Spritesheets/>
+		<Layers/>
+		<Nulls/>
+		<Events/>
+	</Content>
+	<Animations DefaultAnimation=""/>
+</AnimatedActor>
