@@ -2,7 +2,7 @@ PlaceholderGlobal.Enum = {}
 
 PlaceholderGlobal.Enum.Obj = {
     Game = Game(),
-    Sfx = SFXManager(),
+    SFX = SFXManager(),
 }
 
 ---@enum FireplaceVariant
