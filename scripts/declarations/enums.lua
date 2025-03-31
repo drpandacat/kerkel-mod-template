@@ -84,6 +84,7 @@ PlaceholderGlobal.Enum.Dict = {
         [CollectibleType.COLLECTIBLE_ANALOG_STICK] = true,
         [CollectibleType.COLLECTIBLE_EYE_OF_THE_OCCULT] = true,
         [CollectibleType.COLLECTIBLE_EPIC_FETUS] = true,
+        [CollectibleType.COLLECTIBLE_LUDOVICO_TECHNIQUE] = true,
     },
     ---@type table<EffectVariant, true>
     CREEP = {
