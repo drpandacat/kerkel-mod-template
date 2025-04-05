@@ -377,6 +377,8 @@ function PlaceholderGlobal.Util:GetData(entity, identifier, persistenceMode, def
 
     if not persistenceMode or persistenceMode == PlaceholderGlobal.Enum.DataPersistenceMode.TEMP then
         data = entity:GetData()
+        data._______LE_EPIC_DATA = data._______LE_EPIC_DATA or {}
+        data = data._______LE_EPIC_DATA
     else
         if persistenceMode == PlaceholderGlobal.Enum.DataPersistenceMode.RUN then
             data = PlaceholderGlobal.SaveManager.GetRunSave(entity)
@@ -393,11 +395,10 @@ function PlaceholderGlobal.Util:GetData(entity, identifier, persistenceMode, def
         end
     end
 
-    data._______LE_EPIC_DATA = data._______LE_EPIC_DATA or {}
-    data._______LE_EPIC_DATA[PlaceholderGlobal.Name] = data._______LE_EPIC_DATA[PlaceholderGlobal.Name] or {}
-    data._______LE_EPIC_DATA[PlaceholderGlobal.Name][identifier] = data._______LE_EPIC_DATA[PlaceholderGlobal.Name][identifier] or default or {}
+    data[PlaceholderGlobal.Name] = data[PlaceholderGlobal.Name] or {}
+    data[PlaceholderGlobal.Name][identifier] = data[PlaceholderGlobal.Name][identifier] or default or {}
 
-    return data._______LE_EPIC_DATA[PlaceholderGlobal.Name][identifier]
+    return data[PlaceholderGlobal.Name][identifier]
 end
 
 ---@param player EntityPlayer
