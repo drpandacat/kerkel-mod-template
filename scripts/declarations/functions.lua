@@ -528,6 +528,15 @@ function PlaceholderGlobal.Util:IsValidEnemy(entity)
     return (entity:IsEnemy() and entity:IsVulnerableEnemy() and not entity:HasEntityFlags(EntityFlag.FLAG_FRIENDLY))
 end
 
+---@param pos Vector
+---@param source? Entity
+---@param maxDistance? number
+function PlaceholderGlobal.Util:GetNearestEnemy(pos, source, maxDistance)
+    return PlaceholderGlobal.Util:GetNearestEntity(pos, source, maxDistance, function (entity)
+        return PlaceholderGlobal.Util:IsValidEnemy(entity)
+    end)
+end
+
 ---@param idx integer
 ---@param max integer
 ---@param spread number
