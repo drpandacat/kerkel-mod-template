@@ -80,11 +80,12 @@ PlaceholderGlobal.Enum.Dict = {
     },
     ---@type table<CollectibleType, true>
     AIM_UNCLAMP_COLLECTIBLE = {
-        [CollectibleType.COLLECTIBLE_MARKED] = true,
-        [CollectibleType.COLLECTIBLE_ANALOG_STICK] = true,
-        [CollectibleType.COLLECTIBLE_EYE_OF_THE_OCCULT] = true,
+        [CollectibleType.COLLECTIBLE_MOMS_KNIFE] = true,
         [CollectibleType.COLLECTIBLE_EPIC_FETUS] = true,
         [CollectibleType.COLLECTIBLE_LUDOVICO_TECHNIQUE] = true,
+        [CollectibleType.COLLECTIBLE_MARKED] = true,
+        [CollectibleType.COLLECTIBLE_ANALOG_STICK] = true,
+        [CollectibleType.COLLECTIBLE_EYE_OF_THE_OCCULT] = true
     },
     ---@type table<EffectVariant, true>
     CREEP = {

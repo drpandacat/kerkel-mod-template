@@ -556,3 +556,19 @@ function PlaceholderGlobal.Util:CopyColor(color)
 
     return _color
 end
+
+---@param kColor KColor
+function PlaceholderGlobal.Util:CopyKColor(kColor)
+    return KColor(kColor.Red, kColor.Green, kColor.Blue, kColor.Alpha)
+end
+
+function PlaceholderGlobal.Util:IsRoomClear()
+    local room = PlaceholderGlobal.Enum.Obj.Game:GetRoom()
+    return room:IsClear() and not room:IsAmbushActive()
+end
+
+---@param value integer
+---@param trinket TrinketType
+function PlaceholderGlobal.Util:EqualsTrinket(value, trinket)
+    return trinket == value or trinket + TrinketType.TRINKET_GOLDEN_FLAG == value
+end
