@@ -504,7 +504,7 @@ function PlaceholderGlobal.Util:EntitiesByDistance(list, pos, filter, source)
     ---@param a Entity
     ---@param b Entity
     table.sort(_list, function (a, b)
-        return a.Position:Distance(pos) < b.Position:Distance(pos)
+        return a.Position:DistanceSquared(pos) < b.Position:DistanceSquared(pos)
     end)
 
     return _list
@@ -571,4 +571,46 @@ end
 ---@param trinket TrinketType
 function PlaceholderGlobal.Util:EqualsTrinket(value, trinket)
     return trinket == value or trinket + TrinketType.TRINKET_GOLDEN_FLAG == value
+end
+
+---@param familiar EntityFamiliar
+function PlaceholderGlobal.Util:ShouldAutoAim(familiar)
+    return PlaceholderGlobal.Util:IsShootingDynamic(familiar.Player)
+    and (familiar.Player:HasCollectible(CollectibleType.COLLECTIBLE_KING_BABY)
+        or familiar.Player:GetEffects():HasCollectibleEffect(CollectibleType.COLLECTIBLE_KING_BABY)
+        or (
+            familiar.Player:GetPlayerType() == PlayerType.PLAYER_LILITH_B
+            and familiar.Player:HasCollectible(CollectibleType.COLLECTIBLE_BIRTHRIGHT)
+        )
+    )
+end
+
+---@param familiar EntityFamiliar
+function PlaceholderGlobal.Util:GetFamiliarAimVect(familiar)
+    if PlaceholderGlobal.Util:ShouldAutoAim(familiar) then
+        local entity = PlaceholderGlobal.Util:GetNearestEnemy(familiar.Position, nil, 800) -- Thanks Benny
+        if entity then
+            return (entity.Position - familiar.Position):Normalized()
+        end
+    end
+
+    if familiar.Player:HasCollectible(CollectibleType.COLLECTIBLE_MARKED) then
+        local pHash
+        local target = REPENTOGON and familiar.Player:GetMarkedTarget()
+        or PlaceholderGlobal.Util:Filter(Isaac.FindByType(EntityType.ENTITY_EFFECT, EffectVariant.TARGET), function (entity)
+            if not entity.SpawnerEntity then return end
+            pHash = pHash or GetPtrHash(familiar.Player)
+            return GetPtrHash(entity.SpawnerEntity) == pHash
+        end)[1]
+        or PlaceholderGlobal.Util:Filter(Isaac.FindByType(EntityType.ENTITY_EFFECT, EffectVariant.OCCULT_TARGET), function (entity)
+            if not entity.SpawnerEntity then return end
+            pHash = pHash or GetPtrHash(familiar.Player)
+            return GetPtrHash(entity.SpawnerEntity) == pHash
+        end)[1]
+        if target then
+            return (target.Position - familiar.Position):Normalized()
+        end
+    end
+
+    return PlaceholderGlobal.Util:DirectionToVector(familiar.Player:GetFireDirection())
 end
