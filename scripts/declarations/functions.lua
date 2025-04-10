@@ -595,18 +595,18 @@ function PlaceholderGlobal.Util:GetFamiliarAimVect(familiar)
     end
 
     if familiar.Player:HasCollectible(CollectibleType.COLLECTIBLE_MARKED) then
-        local pHash
+        local hash
         ---@diagnostic disable-next-line: undefined-field
         local target = REPENTOGON and familiar.Player:GetMarkedTarget()
         or PlaceholderGlobal.Util:Filter(Isaac.FindByType(EntityType.ENTITY_EFFECT, EffectVariant.TARGET), function (entity)
             if not entity.SpawnerEntity then return end
-            pHash = pHash or GetPtrHash(familiar.Player)
-            return GetPtrHash(entity.SpawnerEntity) == pHash
+            hash = hash or GetPtrHash(familiar.Player)
+            return GetPtrHash(entity.SpawnerEntity) == hash
         end)[1]
         or PlaceholderGlobal.Util:Filter(Isaac.FindByType(EntityType.ENTITY_EFFECT, EffectVariant.OCCULT_TARGET), function (entity)
             if not entity.SpawnerEntity then return end
-            pHash = pHash or GetPtrHash(familiar.Player)
-            return GetPtrHash(entity.SpawnerEntity) == pHash
+            hash = hash or GetPtrHash(familiar.Player)
+            return GetPtrHash(entity.SpawnerEntity) == hash
         end)[1]
         if target then
             return (target.Position - familiar.Position):Normalized()
