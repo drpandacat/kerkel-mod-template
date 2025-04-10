@@ -596,6 +596,7 @@ function PlaceholderGlobal.Util:GetFamiliarAimVect(familiar)
 
     if familiar.Player:HasCollectible(CollectibleType.COLLECTIBLE_MARKED) then
         local pHash
+        ---@diagnostic disable-next-line: undefined-field
         local target = REPENTOGON and familiar.Player:GetMarkedTarget()
         or PlaceholderGlobal.Util:Filter(Isaac.FindByType(EntityType.ENTITY_EFFECT, EffectVariant.TARGET), function (entity)
             if not entity.SpawnerEntity then return end
