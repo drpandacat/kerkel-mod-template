@@ -213,7 +213,7 @@ function PlaceholderGlobal.Util:RandomVector(rng)
 end
 
 ---@param player EntityPlayer
----@param flags integer
+---@param flags CacheFlag | integer
 function PlaceholderGlobal.Util:AddCacheFlags(player, flags)
     if REPENTOGON then
         ---@diagnostic disable-next-line: redundant-parameter
