@@ -480,10 +480,12 @@ function PlaceholderGlobal.Util:GetDynamicAimDir(player)
     end
 end
 
----@param list Entity[]
+---@generic T[]
+---@param list T[]
 ---@param pos Vector
----@param filter? fun(entity: Entity): boolean?
+---@param filter? fun(entity: T): boolean?
 ---@param source? Entity
+---@return T[]
 function PlaceholderGlobal.Util:EntitiesByDistance(list, pos, filter, source)
     local _list = {}
 
@@ -614,4 +616,14 @@ function PlaceholderGlobal.Util:GetFamiliarAimVect(familiar)
     end
 
     return PlaceholderGlobal.Util:DirectionToVector(familiar.Player:GetFireDirection())
+end
+
+---@param id SoundEffect
+function PlaceholderGlobal.Util:TryPlayAnnouncerSound(id)
+    if Options.AnnouncerVoiceMode == 1
+    or Options.AnnouncerVoiceMode == 0 and math.random() < 0.5 then
+        return false
+    end
+    PlaceholderGlobal.Enum.Obj.SFX:Play(id)
+    return true
 end
