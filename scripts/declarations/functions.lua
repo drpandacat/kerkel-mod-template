@@ -627,3 +627,58 @@ function PlaceholderGlobal.Util:TryPlayAnnouncerSound(id)
     PlaceholderGlobal.Enum.Obj.SFX:Play(id)
     return true
 end
+
+--#region thank you foks!
+
+---@class FartConfig
+---@field Position Vector
+---@field Player EntityPlayer
+---@field Color? Color
+---@field SizeMult? number
+---@field Fn? fun(entity: Entity, player: EntityPlayer)
+---@field Knockback? boolean
+
+---@param config FartConfig
+function PlaceholderGlobal.Util:Fart(config)
+    local gigante = config.Player:HasTrinket(TrinketType.TRINKET_GIGANTE_BEAN)
+    local radius = gigante and 170 or 85 * (config.SizeMult or 1)
+    local scale = gigante and 2 or 1 * (config.SizeMult or 1)
+    local effect = PlaceholderGlobal.Util:SpawnEffect(EffectVariant.FART, config.Position)
+
+    effect.SpriteScale = effect.SpriteScale * scale
+    effect.Color = config.Color or effect.Color
+
+    if scale > 1.8 then
+        PlaceholderGlobal.Enum.Obj.SFX:Stop(SoundEffect.SOUND_FART)
+        PlaceholderGlobal.Enum.Obj.SFX:Play(SoundEffect.SOUND_FART, 1, 0, false, 1)
+        PlaceholderGlobal.Enum.Obj.SFX:Play(SoundEffect.SOUND_FART, 1.2, 20, false, 0.5)
+        PlaceholderGlobal.Enum.Obj.Game:ShakeScreen(3)
+    end
+
+    if config.Knockback ~= false then
+        PlaceholderGlobal.Enum.Obj.Game:ButterBeanFart(effect.Position, radius, config.Player, false, false)
+    end
+
+    local ghostPepper = config.Player:HasCollectible(CollectibleType.COLLECTIBLE_GHOST_PEPPER)
+    local vect = config.Player:GetMovementVector()
+
+    vect = vect:Length() < 0.01 and PlaceholderGlobal.Enum.Dict.DIRECTION_TO_VECTOR[Direction.UP] or -vect
+
+    if config.Player:HasCollectible(CollectibleType.COLLECTIBLE_BIRDS_EYE)
+    and (not ghostPepper or PlaceholderGlobal.Util:NewRNG(effect.InitSeed):RandomFloat() < 0.5) then
+        config.Player:ShootRedCandle(vect)
+    elseif ghostPepper then
+        config.Player:ShootBlueCandle(vect)
+    end
+
+    if config.Fn then
+        for _, entity in pairs(PlaceholderGlobal.Util:Filter(Isaac.FindInRadius(config.Position, radius, EntityPartition.ENEMY), function (value)
+            return PlaceholderGlobal.Util:IsValidEnemy(value)
+        end)) do
+            config.Fn(entity, config.Player)
+        end
+    end
+
+    return effect, gigante
+end
+--#endregion
