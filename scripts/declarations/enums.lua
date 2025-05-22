@@ -1,9 +1,11 @@
 PlaceholderGlobal.Enum = {}
 
-PlaceholderGlobal.Enum.Obj = {
-    Game = Game(),
-    SFX = SFXManager(),
-}
+PlaceholderGlobal.Enum.Obj = {}
+
+PlaceholderGlobal.Enum.Obj.Game = Game()
+PlaceholderGlobal.Enum.Obj.SFX = SFXManager()
+PlaceholderGlobal.Enum.Obj.Config = Isaac.GetItemConfig()
+PlaceholderGlobal.Enum.Obj.Level = PlaceholderGlobal.Enum.Obj.Game:GetLevel()
 
 ---@enum FireplaceVariant
 PlaceholderGlobal.Enum.Fireplace = {
@@ -143,6 +145,16 @@ PlaceholderGlobal.Enum.Dict = {
         [EffectVariant.PLAYER_CREEP_PUDDLE_MILK] = true,
         [EffectVariant.COLOSTOMIA_PUDDLE] = true,
     },
+    ---@type table<CollectibleType, ItemConfigItem>
+    COLLECTIBLE_CONFIG = {},
+    ---@type table<TrinketType, ItemConfigItem>
+    TRINKET_CONFIG = {},
+    ---@type table<Card, ItemConfigCard>
+    CARD_CONFIG = {},
+    ---@type table<NullItemID, ItemConfigItem>
+    NULL_CONFIG = {},
+    ---@type table<PillEffect, ItemConfigPillEffect>
+    PILL_CONFIG = {},
 }
 
 ---@enum CardFilterFlag

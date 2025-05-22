@@ -590,7 +590,7 @@ end
 ---@param familiar EntityFamiliar
 function PlaceholderGlobal.Util:GetFamiliarAimVect(familiar)
     if PlaceholderGlobal.Util:ShouldAutoAim(familiar) then
-        local entity = PlaceholderGlobal.Util:GetNearestEnemy(familiar.Position, nil, 800) -- Thanks Benny
+        local entity = PlaceholderGlobal.Util:GetNearestEnemy(familiar.Position, nil, 800) -- ty benny
         if entity then
             return (entity.Position - familiar.Position):Normalized()
         end
@@ -628,7 +628,7 @@ function PlaceholderGlobal.Util:TryPlayAnnouncerSound(id)
     return true
 end
 
---#region thank you foks!
+--#region ty foks!
 
 ---@class FartConfig
 ---@field Position Vector
@@ -682,3 +682,33 @@ function PlaceholderGlobal.Util:Fart(config)
     return effect, gigante
 end
 --#endregion
+
+---@param id CollectibleType
+function PlaceholderGlobal.Util:GetCollectibleConfig(id)
+    PlaceholderGlobal.Enum.Dict.COLLECTIBLE_CONFIG[id] = PlaceholderGlobal.Enum.Dict.COLLECTIBLE_CONFIG[id] or PlaceholderGlobal.Enum.Obj.Config:GetCollectible(id)
+    return PlaceholderGlobal.Enum.Dict.COLLECTIBLE_CONFIG[id]
+end
+
+---@param id TrinketType
+function PlaceholderGlobal.Util:GetTrinketConfig(id)
+    PlaceholderGlobal.Enum.Dict.TRINKET_CONFIG[id] = PlaceholderGlobal.Enum.Dict.TRINKET_CONFIG[id] or PlaceholderGlobal.Enum.Obj.Config:GetTrinket(id)
+    return PlaceholderGlobal.Enum.Dict.TRINKET_CONFIG[id]
+end
+
+---@param id Card
+function PlaceholderGlobal.Util:GetCardConfig(id)
+    PlaceholderGlobal.Enum.Dict.CARD_CONFIG[id] = PlaceholderGlobal.Enum.Dict.CARD_CONFIG[id] or PlaceholderGlobal.Enum.Obj.Config:GetCard(id)
+    return PlaceholderGlobal.Enum.Dict.CARD_CONFIG[id]
+end
+
+---@param id NullItemID
+function PlaceholderGlobal.Util:GetNullConfig(id)
+    PlaceholderGlobal.Enum.Dict.NULL_CONFIG[id] = PlaceholderGlobal.Enum.Dict.NULL_CONFIG[id] or PlaceholderGlobal.Enum.Obj.Config:GetNullItem(id)
+    return PlaceholderGlobal.Enum.Dict.NULL_CONFIG[id]
+end
+
+---@param id PillEffect
+function PlaceholderGlobal.Util:GetPillConfig(id)
+    PlaceholderGlobal.Enum.Dict.PILL_CONFIG[id] = PlaceholderGlobal.Enum.Dict.PILL_CONFIG[id] or PlaceholderGlobal.Enum.Obj.Config:GetPillEffect(id)
+    return PlaceholderGlobal.Enum.Dict.PILL_CONFIG[id]
+end
