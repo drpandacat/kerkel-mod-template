@@ -712,3 +712,42 @@ function PlaceholderGlobal.Util:GetPillConfig(id)
     PlaceholderGlobal.Enum.Dict.PILL_CONFIG[id] = PlaceholderGlobal.Enum.Dict.PILL_CONFIG[id] or PlaceholderGlobal.Enum.Obj.Config:GetPillEffect(id)
     return PlaceholderGlobal.Enum.Dict.PILL_CONFIG[id]
 end
+
+---@param id NullItemID
+function PlaceholderGlobal.Util:AnyoneHasNullEffect(id)
+    for _, player in ipairs(PlaceholderGlobal.Util:GetPlayers()) do
+        if player:GetEffects():HasNullEffect(id) then
+            return true
+        end
+    end
+    return false
+end
+
+---@param playerType PlayerType
+---@param nullEffect NullItemID
+function PlaceholderGlobal.Util:AnyPlayerTypeHasNullEffect(playerType, nullEffect)
+    for _, player in ipairs(PlaceholderGlobal.Util:GetPlayers()) do
+        if player:GetPlayerType() == playerType and player:GetEffects():HasNullEffect(nullEffect) then
+            return true
+        end
+    end
+    return false
+end
+
+---@param id NullItemID
+function PlaceholderGlobal.Util:FirstNullEffectOwner(id)
+    for _, player in ipairs(PlaceholderGlobal.Util:GetPlayers()) do
+        if player:GetEffects():HasNullEffect(id) then
+            return player
+        end
+    end
+end
+
+---@param id NullItemID
+function PlaceholderGlobal.Util:GetNumNullEffects(id)
+    local num = 0
+    for _, player in ipairs(PlaceholderGlobal.Util:GetPlayers()) do
+        num = num + player:GetEffects():GetNullEffectNum(id)
+    end
+    return num
+end
