@@ -411,7 +411,8 @@ end
 ---@param player EntityPlayer
 ---@param disableClamp? boolean
 function PlaceholderGlobal.Util:GetInputAimVect(player, disableClamp)
-    local returnVect = Vector.Zero
+    ---@type Vector
+    local returnVect
 
     if player.ControllerIndex == 0 and Options.MouseControl then
         if Input.IsMouseBtnPressed(0) then
