@@ -251,7 +251,6 @@ end
 function PlaceholderGlobal.Util:GetFilteredCollectible(filter, poolType, maxTries, seed)
     local rng = PlaceholderGlobal.Util:NewRNG(seed or PlaceholderGlobal.Enum.Obj.Game:GetSeeds():GetStartSeed())
     local pool = PlaceholderGlobal.Enum.Obj.Game:GetItemPool()
-    local config = Isaac.GetItemConfig()
     local collectible = CollectibleType.COLLECTIBLE_BREAKFAST
     local successful
 
@@ -260,7 +259,7 @@ function PlaceholderGlobal.Util:GetFilteredCollectible(filter, poolType, maxTrie
     for _ = 1, maxTries or 200 do
         collectible = pool:GetCollectible(poolType, false, rng:Next())
 
-        if filter(config:GetCollectible(collectible)) then
+        if filter(PlaceholderGlobal.Util:GetCollectibleConfig(collectible)) then
             successful = true
             break
         end
@@ -277,13 +276,12 @@ end
 function PlaceholderGlobal.Util:GetFilteredTrinket(filter, maxTries)
     local trinket = TrinketType.TRINKET_WIGGLE_WORM
     local pool = PlaceholderGlobal.Enum.Obj.Game:GetItemPool()
-    local config = Isaac.GetItemConfig()
     local successful
 
     for _ = 1, maxTries or 100 do
         trinket = pool:GetTrinket()
 
-        if filter(config:GetTrinket(trinket)) then
+        if filter(PlaceholderGlobal.Util:GetTrinketConfig(trinket)) then
             successful = true
             break
         end
@@ -302,7 +300,6 @@ end
 function PlaceholderGlobal.Util:GetFilteredCard(filter, maxTries, seed, flags)
     local card = Card.CARD_FOOL
     local pool = PlaceholderGlobal.Enum.Obj.Game:GetItemPool()
-    local config = Isaac.GetItemConfig()
     local successful
 
     seed = seed or PlaceholderGlobal.Enum.Obj.Game:GetSeeds():GetStartSeed()
@@ -316,7 +313,7 @@ function PlaceholderGlobal.Util:GetFilteredCard(filter, maxTries, seed, flags)
             PlaceholderGlobal.Util:HasFlags(flags, PlaceholderGlobal.Enum.CardFilterFlags.RUNES_ONLY)
         )
 
-        if filter(config:GetCard(card)) then
+        if filter(PlaceholderGlobal.Util:GetCardConfig(card)) then
             successful = true
             break
         end
