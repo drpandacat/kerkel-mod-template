@@ -398,7 +398,7 @@ function PlaceholderGlobal.Util:GetData(identifier, entity, persistenceFlags, de
         end
     end
 
-    data[identifier] = data[identifier] or (default and PlaceholderGlobal.Util:DeepCopy(default)) or {}
+    data[identifier] = data[identifier] or (default and PlaceholderGlobal.Util:DeepCopy(default, true)) or {}
 
     return data[identifier]
 end
