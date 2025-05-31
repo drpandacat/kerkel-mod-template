@@ -364,38 +364,43 @@ function PlaceholderGlobal.Util:GetPlayerFromEntity(entity, searchType)
     end
 end
 
----@param entity Entity
 ---@param identifier string
----@param persistenceMode? DataPersistenceMode
+---@param entity? Entity
+---@param persistenceFlags? DataPersistenceFlag | integer
 ---@param default? table
 ---@return table
-function PlaceholderGlobal.Util:GetData(entity, identifier, persistenceMode, default)
+function PlaceholderGlobal.Util:GetData(identifier, entity, persistenceFlags, default)
     local data
 
-    if not persistenceMode or persistenceMode == PlaceholderGlobal.Enum.DataPersistenceMode.TEMP then
-        data = entity:GetData()
-        data._______LE_EPIC_DATA = data._______LE_EPIC_DATA or {}
-        data = data._______LE_EPIC_DATA
+    if not persistenceFlags then
+        if entity then
+            local hash = GetPtrHash(entity)
+            PlaceholderGlobal.Data.ENTITY[hash] = PlaceholderGlobal.Data.ENTITY[hash] or {}
+            data = PlaceholderGlobal.Data.ENTITY[hash]
+        else
+            data = PlaceholderGlobal.Data.GLOBAL
+        end
     else
-        if persistenceMode == PlaceholderGlobal.Enum.DataPersistenceMode.RUN then
+        if PlaceholderGlobal.Util:HasFlags(persistenceFlags, PlaceholderGlobal.Enum.DataPersistenceFlag.RUN) then
             data = PlaceholderGlobal.SaveManager.GetRunSave(entity)
-        elseif persistenceMode == PlaceholderGlobal.Enum.DataPersistenceMode.ROOM then
+        elseif PlaceholderGlobal.Util:HasFlags(persistenceFlags, PlaceholderGlobal.Enum.DataPersistenceFlag.FLOOR) then
+            data = PlaceholderGlobal.SaveManager.GetFloorSave(entity)
+        elseif PlaceholderGlobal.Util:HasFlags(persistenceFlags, PlaceholderGlobal.Enum.DataPersistenceFlag.ROOM) then
             data = PlaceholderGlobal.SaveManager.GetRoomSave(entity)
-        elseif persistenceMode == PlaceholderGlobal.Enum.DataPersistenceMode.FLOOR_REROLL then
-            data = PlaceholderGlobal.SaveManager.GetFloorSave(entity).RerollSave
-        elseif persistenceMode == PlaceholderGlobal.Enum.DataPersistenceMode.FLOOR_NO_REROLL then
-            data = PlaceholderGlobal.SaveManager.GetFloorSave(entity).NoRerollSave
-        elseif persistenceMode == PlaceholderGlobal.Enum.DataPersistenceMode.ALL_REROLL then
-            data = PlaceholderGlobal.SaveManager.GetRoomFloorSave(entity).RerollSave
-        elseif persistenceMode == PlaceholderGlobal.Enum.DataPersistenceMode.NONE_REROLL then
-            data = PlaceholderGlobal.SaveManager.GetRoomFloorSave(entity).NoRerollSave
+        elseif PlaceholderGlobal.Util:HasFlags(persistenceFlags, PlaceholderGlobal.Enum.DataPersistenceFlag.TEMP) then
+            data = PlaceholderGlobal.SaveManager.GetTempSave(entity)
+        end
+
+        if PlaceholderGlobal.Util:HasFlags(persistenceFlags, PlaceholderGlobal.Enum.DataPersistenceFlag.PICKUP_PERSIST_REROLL) then
+            data = data.RerollSave
+        elseif PlaceholderGlobal.Util:HasFlags(persistenceFlags, PlaceholderGlobal.Enum.DataPersistenceFlag.PICKUP_CLEAR_REROLL) then
+            data = data.NoRerollSave
         end
     end
 
-    data[PlaceholderGlobal.Name] = data[PlaceholderGlobal.Name] or {}
-    data[PlaceholderGlobal.Name][identifier] = data[PlaceholderGlobal.Name][identifier] or default or {}
+    data[identifier] = data[identifier] or (default and PlaceholderGlobal.Util:DeepCopy(default)) or {}
 
-    return data[PlaceholderGlobal.Name][identifier]
+    return data[identifier]
 end
 
 ---@param player EntityPlayer

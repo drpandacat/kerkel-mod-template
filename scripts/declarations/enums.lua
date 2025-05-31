@@ -171,13 +171,12 @@ PlaceholderGlobal.Enum.PlayerSearchType = {
     ALL = 3,
 }
 
----@enum DataPersistenceMode
-PlaceholderGlobal.Enum.DataPersistenceMode = {
-    TEMP = 1,
-    RUN = 2,
-    ROOM = 3,
-    FLOOR_REROLL = 4,
-    FLOOR_NO_REROLL = 5,
-    ALL_REROLL = 6,
-    NONE_REROLL = 7,
+---@enum DataPersistenceFlag
+PlaceholderGlobal.Enum.DataPersistenceFlag = {
+    RUN = 1 << 1,
+    FLOOR = 2 << 1,
+    ROOM = 3 << 1,
+    TEMP = 4 << 1,
+    PICKUP_PERSIST_REROLL = 5 << 1,
+    PICKUP_CLEAR_REROLL = 6 << 1,
 }
