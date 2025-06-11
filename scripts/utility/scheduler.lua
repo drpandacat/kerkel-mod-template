@@ -54,7 +54,8 @@ return function (mod)
     end
 
     mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, function ()
-        for i, v in pairs(Scheduler.Entries) do
+        for i = #Scheduler.Entries, 1, -1 do
+            local v = Scheduler.Entries[i]
             if v.Type ~= Scheduler.Type.PERSISTENT then
                 if v.Type ~= Scheduler.Type.LEAVE_ROOM_CANCEL
                 and (
@@ -73,8 +74,8 @@ return function (mod)
 
     mod:AddCallback(ModCallbacks.MC_POST_UPDATE, function ()
         local frameCount = game:GetFrameCount()
-
-        for i, v in pairs(Scheduler.Entries) do
+        for i = #Scheduler.Entries, 1, -1 do
+            local v = Scheduler.Entries[i]
             if v.Frame + v.Delay <= frameCount then
                 table.remove(Scheduler.Entries, i)
                 v.Fn()
