@@ -754,3 +754,30 @@ function PlaceholderGlobal.Util:GetNumNullEffects(id)
     end
     return num
 end
+
+---@param position Vector
+---@param entity? Entity
+function PlaceholderGlobal.Util:IsPositionAccessible(position, entity)
+    local room = PlaceholderGlobal.Enum.Obj.Game:GetRoom()
+    local positions = {}
+    for slot = DoorSlot.LEFT0, DoorSlot.NUM_DOOR_SLOTS - 1 do
+        local door = room:GetDoor(slot)
+
+        if door then
+            positions[#positions + 1] = door.Position + PlaceholderGlobal.Util:DirectionToVector(door.Position):Rotated(180):Resized(40)
+        end
+    end
+    if entity and entity.GridCollisionClass ~= GridCollisionClass.COLLISION_SOLID then
+        return true
+    else
+        for _, v in ipairs(positions) do
+            local npc = PlaceholderGlobal.Util:SpawnNPC(EntityType.ENTITY_SHOPKEEPER, 0, v)
+            local pathFinder = npc.Pathfinder
+            npc:Remove()
+            if pathFinder:HasPathToPos(position, true) then
+                return true
+            end
+        end
+    end
+    return false
+end

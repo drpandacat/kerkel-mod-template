@@ -155,6 +155,34 @@ PlaceholderGlobal.Enum.Dict = {
     NULL_CONFIG = {},
     ---@type table<PillEffect, ItemConfigPillEffect>
     PILL_CONFIG = {},
+    ---@type table<string, Direction>
+    WALK_ANIM_TO_DIRECTION = {
+        WalkDown = Direction.DOWN,
+        WalkUp = Direction.UP,
+        WalkRight = Direction.RIGHT,
+        WalkLeft = Direction.LEFT,
+    },
+    ---@type table<Direction, string>
+    DIRECTION_TO_WALK_ANIM = {
+        [Direction.DOWN] = "WalkDown",
+        [Direction.UP] = "WalkUp",
+        [Direction.RIGHT] = "WalkRight",
+        [Direction.LEFT] = "WalkLeft",
+    },
+    ---@type table<Direction, Direction>
+    CLOCKWISE = {
+        [Direction.LEFT] = Direction.UP,
+        [Direction.UP] = Direction.RIGHT,
+        [Direction.RIGHT] = Direction.DOWN,
+        [Direction.DOWN] = Direction.LEFT,
+    },
+    ---@type table<Direction, Direction>
+    COUNTERCLOCKWISE = {
+        [Direction.LEFT] = Direction.DOWN,
+        [Direction.UP] = Direction.LEFT,
+        [Direction.RIGHT] = Direction.UP,
+        [Direction.DOWN] = Direction.RIGHT,
+    }
 }
 
 ---@enum CardFilterFlag
