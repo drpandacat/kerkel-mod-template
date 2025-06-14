@@ -19,12 +19,6 @@ include("scripts.declarations.repentogoff")
 
 include("scripts.utility.data")
 --#endregion
---#region Compatibility
-include("scripts.compat.eid.system")
-
-include("scripts.compat.fiendfolio.fuzzypickle")
-include("scripts.compat.fiendfolio.stackableitems")
---#endregion
 
 PlaceholderGlobal.Source = {}
 PlaceholderGlobal.Source.Compat = {}
