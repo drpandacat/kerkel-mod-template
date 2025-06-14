@@ -764,7 +764,7 @@ function PlaceholderGlobal.Util:IsPositionAccessible(position, entity)
         local door = room:GetDoor(slot)
 
         if door then
-            positions[#positions + 1] = door.Position + PlaceholderGlobal.Util:DirectionToVector(door.Position):Rotated(180):Resized(40)
+            positions[#positions + 1] = door.Position + PlaceholderGlobal.Util:DirectionToVector(door.Direction):Rotated(180):Resized(40)
         end
     end
     if entity and entity.GridCollisionClass ~= GridCollisionClass.COLLISION_SOLID then

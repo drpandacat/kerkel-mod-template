@@ -1,7 +1,8 @@
 PlaceholderGlobal = RegisterMod("Placeholder Name", 1)
 
 --#region Early utility
-
+include("scripts.utility.modcompathelper")
+ModCompatHelper:Clear(PlaceholderGlobal)
 PlaceholderGlobal.SaveManager = require("scripts.utility.savemanager")
 PlaceholderGlobal.SaveManager.Init(PlaceholderGlobal)
 PlaceholderGlobal.Scheduler = include("scripts.utility.scheduler")(PlaceholderGlobal)
@@ -18,3 +19,16 @@ include("scripts.declarations.repentogoff")
 
 include("scripts.utility.data")
 --#endregion
+--#region Compatibility
+include("scripts.compat.eid.system")
+
+include("scripts.compat.fiendfolio.fuzzypickle")
+include("scripts.compat.fiendfolio.stackableitems")
+--#endregion
+
+PlaceholderGlobal.Source = {}
+PlaceholderGlobal.Source.Compat = {}
+PlaceholderGlobal.Source.Compat.EID = include("scripts.compat.eid")
+PlaceholderGlobal.Source.Compat.FiendFolio = include("scripts.compat.fiendfolio")
+
+ModCompatHelper:Init()

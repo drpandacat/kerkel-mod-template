@@ -182,7 +182,7 @@ PlaceholderGlobal.Enum.Dict = {
         [Direction.UP] = Direction.LEFT,
         [Direction.RIGHT] = Direction.UP,
         [Direction.DOWN] = Direction.RIGHT,
-    }
+    },
 }
 
 ---@enum CardFilterFlag
