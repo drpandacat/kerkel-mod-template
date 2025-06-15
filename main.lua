@@ -5,12 +5,12 @@ PlaceholderGlobal.SUFFIX = ""
 
 ---@param path string
 local function include(path)
-    return _G.include("scripts" .. PlaceholderGlobal.PREFIX .. "." .. path)
+    return _G.include("scripts" .. PlaceholderGlobal.SUFFIX .. "." .. path)
 end
 
 ---@param path string
 local function require(path)
-    return _G.require("scripts" .. PlaceholderGlobal.PREFIX .. "." .. path)
+    return _G.require("scripts" .. PlaceholderGlobal.SUFFIX .. "." .. path)
 end
 
 --#region Early utility
