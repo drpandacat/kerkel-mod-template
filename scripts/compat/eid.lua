@@ -98,6 +98,32 @@ ModCompatHelper:Register(PlaceholderGlobal, "EID", function ()
         for id, entry in pairs(entries) do
             for lang, config in pairs(entry) do
                 DESC_TYPE_TO_FN[type](EID, id, config.Description, config.Name, lang)
+
+                if REPENTOGON then
+                    if type == t.Desc.CARD then
+                        local card = PlaceholderGlobal.Util:GetCardConfig(id)
+                        ---@type Sprite
+                        ---@diagnostic disable-next-line: undefined-field
+                        local old = card.ModdedCardFront
+                        local new = Sprite()
+                        new:Load(old:GetFilename(), true)
+                        new:Play(card.HudAnim, true)
+                        new:GetLayer(0):SetSize(Vector.One * 0.5)
+                        EID:addIcon("Card" .. id, card.HudAnim, -1, 9, 9, 4, 8, new)
+                    elseif type == t.Desc.PLAYER then
+                        local player = EntityConfig.GetPlayer(id) ---@cast player EntityConfigPlayer
+                        local old = player:GetModdedCoopMenuSprite()
+                        if old then
+                            local new = Sprite()
+                            local anim = player:GetName()
+                            new:Load(old:GetFilename())
+                            new:Play(anim, true)
+                            new:GetLayer(0):SetSize(Vector.One * 0.7)
+                            EID:addIcon("Player" .. id, anim, 0, 16, 16, 7.5, 5, new)
+                        end
+                    end
+                end
+
                 if config.Modifier then
                     EID:addDescriptionModifier(
                         "le epic modifier" .. PlaceholderGlobal.Name,

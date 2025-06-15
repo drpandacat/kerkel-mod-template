@@ -1,28 +1,41 @@
 PlaceholderGlobal = RegisterMod("Placeholder Name", 1)
 
+PlaceholderGlobal.PREFIX = "(Placeholder) "
+PlaceholderGlobal.SUFFIX = ""
+
+---@param path string
+local function include(path)
+    return _G.include("scripts" .. PlaceholderGlobal.PREFIX .. "." .. path)
+end
+
+---@param path string
+local function require(path)
+    return _G.require("scripts" .. PlaceholderGlobal.PREFIX .. "." .. path)
+end
+
 --#region Early utility
-include("scripts.utility.modcompathelper")
+include("utility.modcompathelper")
 ModCompatHelper:Clear(PlaceholderGlobal)
-PlaceholderGlobal.SaveManager = require("scripts.utility.savemanager")
+PlaceholderGlobal.SaveManager = require("utility.savemanager")
 PlaceholderGlobal.SaveManager.Init(PlaceholderGlobal)
-PlaceholderGlobal.Scheduler = include("scripts.utility.scheduler")(PlaceholderGlobal)
+PlaceholderGlobal.Scheduler = include("utility.scheduler")(PlaceholderGlobal)
 --#endregion
 --#region Declarations
 
-PlaceholderGlobal.Data = require("scripts.declarations.data")
+PlaceholderGlobal.Data = require("declarations.data")
 
-include("scripts.declarations.enums")
-include("scripts.declarations.functions")
-include("scripts.declarations.repentogoff")
+include("declarations.enums")
+include("declarations.functions")
+include("declarations.repentogoff")
 --#endregion
 --#region Late utility
 
-include("scripts.utility.data")
+include("utility.data")
 --#endregion
 
 PlaceholderGlobal.Source = {}
 PlaceholderGlobal.Source.Compat = {}
-PlaceholderGlobal.Source.Compat.EID = include("scripts.compat.eid")
-PlaceholderGlobal.Source.Compat.FiendFolio = include("scripts.compat.fiendfolio")
+PlaceholderGlobal.Source.Compat.EID = include("compat.eid")
+PlaceholderGlobal.Source.Compat.FiendFolio = include("compat.fiendfolio")
 
 ModCompatHelper:Init()
