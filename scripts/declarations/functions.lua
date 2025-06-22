@@ -308,9 +308,9 @@ function PlaceholderGlobal.Util:GetFilteredCard(filter, maxTries, seed, flags)
     for _ = 1, maxTries or 100 do
         card = pool:GetCard(
             seed,
-            PlaceholderGlobal.Util:HasFlags(flags, PlaceholderGlobal.Enum.CardFilterFlags.INCLUDE_PLAYING_CARDS),
-            PlaceholderGlobal.Util:HasFlags(flags, PlaceholderGlobal.Enum.CardFilterFlags.INCLUDE_RUNES),
-            PlaceholderGlobal.Util:HasFlags(flags, PlaceholderGlobal.Enum.CardFilterFlags.RUNES_ONLY)
+            PlaceholderGlobal.Util:HasFlags(flags, PlaceholderGlobal.Enum.CardFilterFlag.INCLUDE_PLAYING_CARDS),
+            PlaceholderGlobal.Util:HasFlags(flags, PlaceholderGlobal.Enum.CardFilterFlag.INCLUDE_RUNES),
+            PlaceholderGlobal.Util:HasFlags(flags, PlaceholderGlobal.Enum.CardFilterFlag.RUNES_ONLY)
         )
 
         if filter(PlaceholderGlobal.Util:GetCardConfig(card)) then
