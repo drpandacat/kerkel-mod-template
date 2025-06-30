@@ -183,87 +183,6 @@ PlaceholderGlobal.Enum.Dict = {
         [Direction.RIGHT] = Direction.UP,
         [Direction.DOWN] = Direction.RIGHT,
     },
-    ---@type ModCallbacks[]
-    POST_ENTITY_INIT = REPENTOGON
-    and {
-        ModCallbacks.MC_POST_PLAYER_INIT,
-        ModCallbacks.MC_POST_TEAR_INIT,
-        ModCallbacks.MC_FAMILIAR_INIT,
-        ModCallbacks.MC_POST_BOMB_INIT,
-        ModCallbacks.MC_POST_PICKUP_INIT,
-        ModCallbacks.MC_POST_SLOT_INIT,
-        ModCallbacks.MC_POST_LASER_INIT,
-        ModCallbacks.MC_POST_KNIFE_INIT,
-        ModCallbacks.MC_POST_PROJECTILE_INIT,
-        ModCallbacks.MC_POST_NPC_INIT,
-        ModCallbacks.MC_POST_EFFECT_INIT,
-    }
-    or {
-        ModCallbacks.MC_POST_PLAYER_INIT,
-        ModCallbacks.MC_POST_TEAR_INIT,
-        ModCallbacks.MC_FAMILIAR_INIT,
-        ModCallbacks.MC_POST_BOMB_INIT,
-        ModCallbacks.MC_POST_PICKUP_INIT,
-        ModCallbacks.MC_POST_LASER_INIT,
-        ModCallbacks.MC_POST_KNIFE_INIT,
-        ModCallbacks.MC_POST_PROJECTILE_INIT,
-        ModCallbacks.MC_POST_NPC_INIT,
-        ModCallbacks.MC_POST_EFFECT_INIT,
-    },
-    ---@type ModCallbacks[]
-    POST_ENTITY_UPDATE = REPENTOGON
-    and {
-        ModCallbacks.MC_POST_PEFFECT_UPDATE,
-        ModCallbacks.MC_POST_TEAR_UPDATE,
-        ModCallbacks.MC_FAMILIAR_UPDATE,
-        ModCallbacks.MC_POST_BOMB_UPDATE,
-        ModCallbacks.MC_POST_PICKUP_UPDATE,
-        ModCallbacks.MC_POST_SLOT_UPDATE,
-        ModCallbacks.MC_POST_LASER_UPDATE,
-        ModCallbacks.MC_POST_KNIFE_UPDATE,
-        ModCallbacks.MC_POST_PROJECTILE_UPDATE,
-        ModCallbacks.MC_NPC_UPDATE,
-        ModCallbacks.MC_POST_EFFECT_UPDATE,
-    }
-    or {
-        ModCallbacks.MC_POST_PEFFECT_UPDATE,
-        ModCallbacks.MC_POST_TEAR_UPDATE,
-        ModCallbacks.MC_FAMILIAR_UPDATE,
-        ModCallbacks.MC_POST_BOMB_UPDATE,
-        ModCallbacks.MC_POST_PICKUP_UPDATE,
-        ModCallbacks.MC_POST_LASER_UPDATE,
-        ModCallbacks.MC_POST_KNIFE_UPDATE,
-        ModCallbacks.MC_POST_PROJECTILE_UPDATE,
-        ModCallbacks.MC_NPC_UPDATE,
-        ModCallbacks.MC_POST_EFFECT_UPDATE,
-    },
-    ---@type ModCallbacks[]
-    POST_ENTITY_RENDER = REPENTOGON
-    and {
-        ModCallbacks.MC_POST_PLAYER_RENDER,
-        ModCallbacks.MC_POST_TEAR_RENDER,
-        ModCallbacks.MC_POST_FAMILIAR_RENDER,
-        ModCallbacks.MC_POST_BOMB_RENDER,
-        ModCallbacks.MC_POST_PICKUP_RENDER,
-        ModCallbacks.MC_POST_SLOT_RENDER,
-        ModCallbacks.MC_POST_LASER_RENDER,
-        ModCallbacks.MC_POST_KNIFE_RENDER,
-        ModCallbacks.MC_POST_PROJECTILE_RENDER,
-        ModCallbacks.MC_POST_NPC_RENDER,
-        ModCallbacks.MC_POST_EFFECT_RENDER,
-    }
-    or {
-        ModCallbacks.MC_POST_PLAYER_RENDER,
-        ModCallbacks.MC_POST_TEAR_RENDER,
-        ModCallbacks.MC_POST_FAMILIAR_RENDER,
-        ModCallbacks.MC_POST_BOMB_RENDER,
-        ModCallbacks.MC_POST_PICKUP_RENDER,
-        ModCallbacks.MC_POST_LASER_RENDER,
-        ModCallbacks.MC_POST_KNIFE_RENDER,
-        ModCallbacks.MC_POST_PROJECTILE_RENDER,
-        ModCallbacks.MC_POST_NPC_RENDER,
-        ModCallbacks.MC_POST_EFFECT_RENDER,
-    },
 }
 
 ---@enum CardFilterFlag
@@ -288,4 +207,5 @@ PlaceholderGlobal.Enum.DataPersistenceFlag = {
     TEMP = 1 << 3,
     PICKUP_PERSIST_REROLL = 1 << 4,
     PICKUP_CLEAR_REROLL = 1 << 5,
+    SHARED = 1 << 6,
 }

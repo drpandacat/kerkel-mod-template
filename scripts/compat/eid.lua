@@ -75,7 +75,7 @@ end
 t.TYPE_TO_OBJ = {
     [t.Desc.COLLECTIBLE] = {EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE},
     [t.Desc.TRINKET] = {EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TRINKET},
-    [t.Desc.CARD] = {EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TRINKET},
+    [t.Desc.CARD] = {EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TAROTCARD},
     [t.Desc.PILL] = {EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_PILL},
     [t.Desc.PLAYER] = {EntityType.ENTITY_PLAYER},
     [t.Desc.BIRTHRIGHT] = {EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, CollectibleType.COLLECTIBLE_BIRTHRIGHT},
@@ -113,6 +113,7 @@ ModCompatHelper:Register(PlaceholderGlobal, "EID", function ()
                     elseif type == t.Desc.PLAYER then
                         local player = EntityConfig.GetPlayer(id) ---@cast player EntityConfigPlayer
                         local old = player:GetModdedCoopMenuSprite()
+
                         if old then
                             local new = Sprite()
                             local anim = player:GetName()

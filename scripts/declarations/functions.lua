@@ -364,15 +364,50 @@ function PlaceholderGlobal.Util:GetPlayerFromEntity(entity, searchType)
     end
 end
 
----@param identifier string
+---@param identifier? string
 ---@param entity? Entity
----@param persistenceFlags? DataPersistenceFlag | integer
+---@param flags? DataPersistenceFlag | integer
 ---@param default? table
 ---@return table
-function PlaceholderGlobal.Util:GetData(identifier, entity, persistenceFlags, default)
+function PlaceholderGlobal.Util:GetData(identifier, entity, flags, default)
     local data
 
-    if not persistenceFlags then
+    if flags and PlaceholderGlobal.Util:HasFlags(flags, PlaceholderGlobal.Enum.DataPersistenceFlag.SHARED) then
+        local player = entity and entity:ToPlayer()
+
+        if player then
+            if REPENTOGON then
+                local state = PlaceholderGlobal.Util:GetData(nil, player, PlaceholderGlobal.Enum.DataPersistenceFlag.RUN).EsauJrState
+                player = state and PlayerManager.GetEsauJrState(state) or player
+            end
+
+            if REPENTOGON and player:GetPlayerType() == PlayerType.PLAYER_LAZARUS2_B then
+                player = player:GetFlippedForm()
+            end
+
+            entity = player
+        end
+    end
+
+    if flags then
+        if PlaceholderGlobal.Util:HasFlags(flags, PlaceholderGlobal.Enum.DataPersistenceFlag.RUN) then
+            data = PlaceholderGlobal.SaveManager.GetRunSave(entity)
+        elseif PlaceholderGlobal.Util:HasFlags(flags, PlaceholderGlobal.Enum.DataPersistenceFlag.FLOOR) then
+            data = PlaceholderGlobal.SaveManager.GetFloorSave(entity)
+        elseif PlaceholderGlobal.Util:HasFlags(flags, PlaceholderGlobal.Enum.DataPersistenceFlag.ROOM) then
+            data = PlaceholderGlobal.SaveManager.GetRoomSave(entity)
+        elseif PlaceholderGlobal.Util:HasFlags(flags, PlaceholderGlobal.Enum.DataPersistenceFlag.TEMP) then
+            data = PlaceholderGlobal.SaveManager.GetTempSave(entity)
+        end
+
+        if PlaceholderGlobal.Util:HasFlags(flags, PlaceholderGlobal.Enum.DataPersistenceFlag.PICKUP_PERSIST_REROLL) then
+            data = data.RerollSave
+        elseif PlaceholderGlobal.Util:HasFlags(flags, PlaceholderGlobal.Enum.DataPersistenceFlag.PICKUP_CLEAR_REROLL) then
+            data = data.NoRerollSave
+        end
+    end
+
+    if not data then
         if entity then
             local hash = GetPtrHash(entity)
             PlaceholderGlobal.Data.ENTITY[hash] = PlaceholderGlobal.Data.ENTITY[hash] or {}
@@ -380,23 +415,9 @@ function PlaceholderGlobal.Util:GetData(identifier, entity, persistenceFlags, de
         else
             data = PlaceholderGlobal.Data.GLOBAL
         end
-    else
-        if PlaceholderGlobal.Util:HasFlags(persistenceFlags, PlaceholderGlobal.Enum.DataPersistenceFlag.RUN) then
-            data = PlaceholderGlobal.SaveManager.GetRunSave(entity)
-        elseif PlaceholderGlobal.Util:HasFlags(persistenceFlags, PlaceholderGlobal.Enum.DataPersistenceFlag.FLOOR) then
-            data = PlaceholderGlobal.SaveManager.GetFloorSave(entity)
-        elseif PlaceholderGlobal.Util:HasFlags(persistenceFlags, PlaceholderGlobal.Enum.DataPersistenceFlag.ROOM) then
-            data = PlaceholderGlobal.SaveManager.GetRoomSave(entity)
-        elseif PlaceholderGlobal.Util:HasFlags(persistenceFlags, PlaceholderGlobal.Enum.DataPersistenceFlag.TEMP) then
-            data = PlaceholderGlobal.SaveManager.GetTempSave(entity)
-        end
-
-        if PlaceholderGlobal.Util:HasFlags(persistenceFlags, PlaceholderGlobal.Enum.DataPersistenceFlag.PICKUP_PERSIST_REROLL) then
-            data = data.RerollSave
-        elseif PlaceholderGlobal.Util:HasFlags(persistenceFlags, PlaceholderGlobal.Enum.DataPersistenceFlag.PICKUP_CLEAR_REROLL) then
-            data = data.NoRerollSave
-        end
     end
+
+    identifier = identifier or "__INTERNAL"
 
     data[identifier] = data[identifier] or (default and PlaceholderGlobal.Util:DeepCopy(default, true)) or {}
 
@@ -780,4 +801,26 @@ function PlaceholderGlobal.Util:IsPositionAccessible(position, entity)
         end
     end
     return false
+end
+
+function PlaceholderGlobal.Util:GetAllPlayers()
+    local players = {}
+    for _, player in ipairs(PlaceholderGlobal.Util:GetPlayers()) do
+        players[#players + 1] = player
+        if REPENTOGON then
+            local flip = player:GetFlippedForm()
+            if flip then
+                players[#players + 1] = flip
+            end
+        end
+    end
+    if REPENTOGON then
+        for i = 0, 3 do
+            local state = PlayerManager.GetEsauJrState(i)
+            if state then
+                players[#players + 1] = state
+            end
+        end
+    end
+    return players
 end

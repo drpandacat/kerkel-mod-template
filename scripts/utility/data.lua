@@ -1,24 +1,38 @@
+local esauJrState
+
 PlaceholderGlobal:AddPriorityCallback(ModCallbacks.MC_PRE_GAME_EXIT, CallbackPriority.LATE, function ()
     for k in pairs(PlaceholderGlobal.Data) do
         PlaceholderGlobal.Data[k] = {}
     end
 end)
 
--- ---@param entity Entity
--- PlaceholderGlobal:AddPriorityCallback(ModCallbacks.MC_POST_ENTITY_REMOVE, CallbackPriority.LATE, function (_, entity)
---     local hash = GetPtrHash(entity)
---     PlaceholderGlobal.Data.ENTITY[hash] = nil
---     PlaceholderGlobal.Data.ENTITY_BACKUP[hash] = nil
--- end)
-
 ---@param entity Entity
-local function PostEntityInit(_, entity)
+PlaceholderGlobal:AddPriorityCallback(ModCallbacks.MC_POST_ENTITY_REMOVE, CallbackPriority.LATE, function (_, entity)
     local hash = GetPtrHash(entity)
     PlaceholderGlobal.Data.ENTITY[hash] = nil
     PlaceholderGlobal.Data.ENTITY_BACKUP[hash] = nil
-end
-for _, v in ipairs(PlaceholderGlobal.Enum.Dict.POST_ENTITY_INIT) do
-    PlaceholderGlobal:AddPriorityCallback(v, CallbackPriority.IMPORTANT - 1, PostEntityInit)
+end)
+
+if REPENTOGON then
+    ---@param player EntityPlayer
+    ---@param flags UseFlag
+    ---@param slot ActiveSlot
+    PlaceholderGlobal:AddPriorityCallback(ModCallbacks.MC_USE_ITEM, CallbackPriority.IMPORTANT, function (_, _, _, player, flags, slot)
+        local data = PlaceholderGlobal.Util:GetData(nil, player)
+        if data.EsauJrMainPlayer then
+            data.EsauJrMainPlayer = nil
+            return
+        end
+        esauJrState = player:GetActiveItemDesc(slot).VarData
+    end, CollectibleType.COLLECTIBLE_ESAU_JR)
+
+    ---@param player EntityPlayer
+    ---@param flag CacheFlag
+    PlaceholderGlobal:AddPriorityCallback(ModCallbacks.MC_EVALUATE_CACHE, CallbackPriority.IMPORTANT, function (_, player, flag)
+        if not esauJrState then return end
+        PlaceholderGlobal.Util:GetData(nil, player, PlaceholderGlobal.Enum.DataPersistenceFlag.RUN).EsauJrState = esauJrState
+        esauJrState = nil
+    end, CacheFlag.CACHE_WEAPON)
 end
 
 if REPENTOGON then

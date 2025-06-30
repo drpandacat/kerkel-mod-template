@@ -38,4 +38,6 @@ PlaceholderGlobal.Source.Compat = {}
 PlaceholderGlobal.Source.Compat.EID = include("compat.eid")
 PlaceholderGlobal.Source.Compat.FiendFolio = include("compat.fiendfolio")
 
+include("compat.eid_descriptions")
+
 ModCompatHelper:Init()
