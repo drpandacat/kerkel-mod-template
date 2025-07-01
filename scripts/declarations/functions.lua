@@ -376,11 +376,6 @@ function PlaceholderGlobal.Util:GetData(identifier, entity, flags, default)
         local player = entity and entity:ToPlayer()
 
         if player then
-            if REPENTOGON then
-                local state = PlaceholderGlobal.Util:GetData(nil, player, PlaceholderGlobal.Enum.DataPersistenceFlag.RUN).EsauJrState
-                player = state and PlayerManager.GetEsauJrState(state) or player
-            end
-
             if REPENTOGON and player:GetPlayerType() == PlayerType.PLAYER_LAZARUS2_B then
                 player = player:GetFlippedForm()
             end
@@ -389,15 +384,13 @@ function PlaceholderGlobal.Util:GetData(identifier, entity, flags, default)
         end
     end
 
-    if flags then
+    if flags and not PlaceholderGlobal.Util:HasFlags(flags, PlaceholderGlobal.Enum.DataPersistenceFlag.TEMP) then
         if PlaceholderGlobal.Util:HasFlags(flags, PlaceholderGlobal.Enum.DataPersistenceFlag.RUN) then
             data = PlaceholderGlobal.SaveManager.GetRunSave(entity)
         elseif PlaceholderGlobal.Util:HasFlags(flags, PlaceholderGlobal.Enum.DataPersistenceFlag.FLOOR) then
             data = PlaceholderGlobal.SaveManager.GetFloorSave(entity)
         elseif PlaceholderGlobal.Util:HasFlags(flags, PlaceholderGlobal.Enum.DataPersistenceFlag.ROOM) then
             data = PlaceholderGlobal.SaveManager.GetRoomSave(entity)
-        elseif PlaceholderGlobal.Util:HasFlags(flags, PlaceholderGlobal.Enum.DataPersistenceFlag.TEMP) then
-            data = PlaceholderGlobal.SaveManager.GetTempSave(entity)
         end
 
         if PlaceholderGlobal.Util:HasFlags(flags, PlaceholderGlobal.Enum.DataPersistenceFlag.PICKUP_PERSIST_REROLL) then
