@@ -5,6 +5,7 @@ local t = {}
 ---@field ObjVariant PickupVariant
 ---@field ObjSubType CollectibleType | TrinketType | Card | PillEffect
 ---@field Description string
+---@field Entity Entity?
 
 ---@class DescriptionConfig
 ---@field Name string
@@ -24,8 +25,8 @@ t.Lang = {
     TURKISH = "turkish"
 }
 
----@enum Desc
-t.Desc = {
+---@enum DescriptionType
+t.Type = {
     COLLECTIBLE = 1,
     TRINKET = 2,
     CARD = 3,
@@ -34,10 +35,10 @@ t.Desc = {
     BIRTHRIGHT = 6,
 }
 
----@type table<Desc, table<CollectibleType | TrinketType | Card | PillEffect | PlayerType, table<Lang, DescriptionConfig>>>
+---@type table<DescriptionType, table<CollectibleType | TrinketType | Card | PillEffect | PlayerType, table<Lang, DescriptionConfig>>>
 t.DESCRIPTIONS = {}
 
----@param type Desc
+---@param type DescriptionType
 ---@param id CollectibleType | TrinketType | Card | PillEffect | PlayerType
 ---@param name string
 ---@param desc string
@@ -65,7 +66,7 @@ function t:GetMult(obj)
 end
 
 ---@param obj DescObj
-function t:Stacks(obj)
+function t:StackCondition(obj)
     if obj.ObjType ~= EntityType.ENTITY_PICKUP then return end
     if obj.ObjVariant == PickupVariant.PICKUP_COLLECTIBLE then
         return PlayerManager.AnyoneHasCollectible(obj.ObjSubType) or PlayerManager.AnyoneHasCollectible(CollectibleType.COLLECTIBLE_DIPLOPIA)
@@ -73,25 +74,25 @@ function t:Stacks(obj)
 end
 
 t.TYPE_TO_OBJ = {
-    [t.Desc.COLLECTIBLE] = {EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE},
-    [t.Desc.TRINKET] = {EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TRINKET},
-    [t.Desc.CARD] = {EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TAROTCARD},
-    [t.Desc.PILL] = {EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_PILL},
-    [t.Desc.PLAYER] = {EntityType.ENTITY_PLAYER},
-    [t.Desc.BIRTHRIGHT] = {EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, CollectibleType.COLLECTIBLE_BIRTHRIGHT},
+    [t.Type.COLLECTIBLE] = {EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE},
+    [t.Type.TRINKET] = {EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TRINKET},
+    [t.Type.CARD] = {EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TAROTCARD},
+    [t.Type.PILL] = {EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_PILL},
+    [t.Type.PLAYER] = {EntityType.ENTITY_PLAYER},
+    [t.Type.BIRTHRIGHT] = {EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, CollectibleType.COLLECTIBLE_BIRTHRIGHT},
 }
 
 ModCompatHelper:Register(PlaceholderGlobal, "EID", function ()
     EID:setModIndicatorName(PlaceholderGlobal.Name)
 
-    ---@type table<Desc, function>
+    ---@type table<DescriptionType, function>
     local DESC_TYPE_TO_FN = {
-        [t.Desc.COLLECTIBLE] = EID.addCollectible,
-        [t.Desc.TRINKET] = EID.addTrinket,
-        [t.Desc.CARD] = EID.addCard,
-        [t.Desc.PILL] = EID.addPill,
-        [t.Desc.PLAYER] = EID.addCharacterInfo,
-        [t.Desc.BIRTHRIGHT] = EID.addBirthright,
+        [t.Type.COLLECTIBLE] = EID.addCollectible,
+        [t.Type.TRINKET] = EID.addTrinket,
+        [t.Type.CARD] = EID.addCard,
+        [t.Type.PILL] = EID.addPill,
+        [t.Type.PLAYER] = EID.addCharacterInfo,
+        [t.Type.BIRTHRIGHT] = EID.addBirthright,
     }
 
     for type, entries in pairs(t.DESCRIPTIONS) do
@@ -100,7 +101,7 @@ ModCompatHelper:Register(PlaceholderGlobal, "EID", function ()
                 DESC_TYPE_TO_FN[type](EID, id, config.Description, config.Name, lang)
 
                 if REPENTOGON then
-                    if type == t.Desc.CARD then
+                    if type == t.Type.CARD then
                         local card = PlaceholderGlobal.Util:GetCardConfig(id)
                         ---@type Sprite
                         ---@diagnostic disable-next-line: undefined-field
@@ -110,7 +111,7 @@ ModCompatHelper:Register(PlaceholderGlobal, "EID", function ()
                         new:Play(card.HudAnim, true)
                         new:GetLayer(0):SetSize(Vector.One * 0.5)
                         EID:addIcon("Card" .. id, card.HudAnim, -1, 9, 9, 4, 8, new)
-                    elseif type == t.Desc.PLAYER then
+                    elseif type == t.Type.PLAYER then
                         local player = EntityConfig.GetPlayer(id) ---@cast player EntityConfigPlayer
                         local old = player:GetModdedCoopMenuSprite()
 

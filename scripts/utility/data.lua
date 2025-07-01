@@ -1,5 +1,3 @@
-local esauJrState
-
 PlaceholderGlobal:AddPriorityCallback(ModCallbacks.MC_PRE_GAME_EXIT, CallbackPriority.LATE, function ()
     for k in pairs(PlaceholderGlobal.Data) do
         PlaceholderGlobal.Data[k] = {}
