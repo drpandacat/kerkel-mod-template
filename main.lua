@@ -1,7 +1,7 @@
 PlaceholderGlobal = RegisterMod("Placeholder Name", 1)
 
 PlaceholderGlobal.PREFIX = "(Placeholder) "
-PlaceholderGlobal.SUFFIX = ""
+PlaceholderGlobal.SUFFIX = "_placeholder"
 
 ---@param path string
 local function include(path)
@@ -33,10 +33,9 @@ include("declarations.repentogoff")
 include("utility.data")
 --#endregion
 
-PlaceholderGlobal.Source = {}
-PlaceholderGlobal.Source.Compat = {}
-PlaceholderGlobal.Source.Compat.EID = include("compat.eid")
-PlaceholderGlobal.Source.Compat.FiendFolio = include("compat.fiendfolio")
+PlaceholderGlobal.Compat = {}
+PlaceholderGlobal.Compat.EID = include("compat.eid")
+PlaceholderGlobal.Compat.FiendFolio = include("compat.fiendfolio")
 
 include("compat.eid_descriptions")
 
