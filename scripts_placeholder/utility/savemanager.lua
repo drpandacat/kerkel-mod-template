@@ -1,4 +1,4 @@
----@diagnostic disable: missing-fields, undefined-field
+---@diagnostic disable: missing-fields, undefined-field, undefined-global
 -- Check out everything here: https://github.com/catinsurance/IsaacSaveManager/
 
 local game = Game()

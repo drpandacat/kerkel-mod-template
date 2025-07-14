@@ -113,7 +113,7 @@ ModCompatHelper:Register(PlaceholderGlobal, "EID", function ()
                         new:GetLayer(0):SetSize(Vector.One * 0.5)
                         EID:addIcon("Card" .. id, card.HudAnim, -1, 9, 9, 4, 8, new)
                     elseif type == t.Type.PLAYER then
-                        ---@diagnostic disable-next-line: undefined-doc-name
+                        ---@diagnostic disable-next-line: undefined-doc-name, undefined-global
                         local player = EntityConfig.GetPlayer(id) ---@cast player EntityConfigPlayer
                         ---@diagnostic disable-next-line: undefined-field
                         local old = player:GetModdedCoopMenuSprite()
