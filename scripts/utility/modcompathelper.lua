@@ -1,4 +1,4 @@
-local VERSION = 2
+local VERSION = 1
 
 ---@type table<string, function>
 local entries = {}
@@ -11,7 +11,6 @@ if ModCompatHelper then
     entries = ModCompatHelper.Entries
 
     if REPENTOGON then
-        ---@diagnostic disable-next-line: undefined-field
         ModCompatHelper:RemoveCallback(ModCallbacks.MC_POST_MODS_LOADED, ModCompatHelper.Load)
     end
 
@@ -30,11 +29,8 @@ function ModCompatHelper:Load()
     end
 end
 
----@param mod any
----@param global? string
----@param fn function
 function ModCompatHelper:Register(mod, global, fn)
-    ModCompatHelper.Entries[#ModCompatHelper.Entries + 1] = {global or "Isaac", fn, mod}
+    ModCompatHelper.Entries[#ModCompatHelper.Entries + 1] = {global, fn, mod}
 end
 
 function ModCompatHelper:Init()

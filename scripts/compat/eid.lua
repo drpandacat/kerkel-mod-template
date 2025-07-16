@@ -102,29 +102,24 @@ ModCompatHelper:Register(PlaceholderGlobal, "EID", function ()
 
                 if REPENTOGON then
                     if type == t.Type.CARD then
-                        local card = PlaceholderGlobal:GetCardConfig(id)
+                        local card = PlaceholderGlobal.Util:GetCardConfig(id)
                         ---@type Sprite
                         ---@diagnostic disable-next-line: undefined-field
                         local old = card.ModdedCardFront
                         local new = Sprite()
                         new:Load(old:GetFilename(), true)
                         new:Play(card.HudAnim, true)
-                        ---@diagnostic disable-next-line: undefined-field
                         new:GetLayer(0):SetSize(Vector.One * 0.5)
                         EID:addIcon("Card" .. id, card.HudAnim, -1, 9, 9, 4, 8, new)
                     elseif type == t.Type.PLAYER then
-                        ---@diagnostic disable-next-line: undefined-doc-name, undefined-global
                         local player = EntityConfig.GetPlayer(id) ---@cast player EntityConfigPlayer
-                        ---@diagnostic disable-next-line: undefined-field
                         local old = player:GetModdedCoopMenuSprite()
 
                         if old then
                             local new = Sprite()
-                            ---@diagnostic disable-next-line: undefined-field
                             local anim = player:GetName()
                             new:Load(old:GetFilename())
                             new:Play(anim, true)
-                            ---@diagnostic disable-next-line: undefined-field
                             new:GetLayer(0):SetSize(Vector.One * 0.7)
                             EID:addIcon("Player" .. id, anim, 0, 16, 16, 7.5, 5, new)
                         end

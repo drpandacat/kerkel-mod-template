@@ -1,7 +1,7 @@
 PlaceholderGlobal = RegisterMod("Placeholder Name", 1)
 
 PlaceholderGlobal.PREFIX = "(Placeholder) "
-PlaceholderGlobal.SUFFIX = "_placeholder"
+PlaceholderGlobal.SUFFIX = ""
 
 ---@param path string
 local function include(path)
@@ -37,6 +37,6 @@ PlaceholderGlobal.Compat = {}
 PlaceholderGlobal.Compat.EID = include("compat.eid")
 PlaceholderGlobal.Compat.FiendFolio = include("compat.fiendfolio")
 
-include("compat.eid_descriptions")
+include("compat.eid_declarations")
 
 ModCompatHelper:Init()
